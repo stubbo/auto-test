@@ -1,9 +1,10 @@
 <?php
 
-namespace App\AutoTest;
+namespace App\AutoTest\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Collection;
+use function collect;
 
 class RequestRule
 {

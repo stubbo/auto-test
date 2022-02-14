@@ -2,16 +2,13 @@
 
 namespace App\Console\Commands;
 
-use App\AutoTest\RequestRule;
-use App\AutoTest\SpecialResource;
-use Exception;
+use App\AutoTest\Request\RequestFaker;
+use App\AutoTest\Request\RequestRule;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Resources\Json\JsonResource;
 use ReflectionException;
 use ReflectionMethod;
 use ReflectionParameter;
-use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 
 class TestGenerateCommand extends Command
@@ -54,13 +51,8 @@ class TestGenerateCommand extends Command
         $request = new ((string) $requestType->getType());
         $rules = RequestRule::fromRequest($request);
 
-
-        /**
-         * @var JsonResource $return
-         */
-        $return = new ((string) $returnType)(new SpecialResource);
-
-        dd($rules);
+        $test = new RequestFaker($rules);
+        dd($test->make());
 
         return 0;
     }
